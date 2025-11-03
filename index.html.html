@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pammy! 🎉</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .birthday-girl {
+            font-weight: bold;
+            font-size: 1.8em;
+            color: #ffeaa7;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* Balloon Game Section */
+        .balloon-game {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .balloons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .balloon {
+            width: 80px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon:hover {
+            transform: scale(1.1);
+        }
+
+        .balloon:before {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .balloon:after {
+            content: "▲";
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Balloon Colors */
+        .balloon-1 { background: #ff6b6b; animation-delay: 0s; }
+        .balloon-2 { background: #4ecdc4; animation-delay: 0.5s; }
+        .balloon-3 { background: #ffe66d; animation-delay: 1s; }
+        .balloon-4 { background: #ff9ff3; animation-delay: 1.5s; }
+        .balloon-5 { background: #6a89cc; animation-delay: 2s; }
+        .balloon-6 { background: #78e08f; animation-delay: 2.5s; }
+
+        /* Photo Reveal Area */
+        .photo-reveal {
+            margin-top: 40px;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .revealed-photo {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 15px;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .photo-caption {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #ffeaa7;
+            font-style: italic;
+            display: none;
+        }
+
+        .instruction {
+            font-size: 1.2em;
+            color: #ffeaa7;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* Secret Message Styling */
+        .secret-message {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: rgba(255, 234, 167, 0.8);
+            color: #d63031;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+            max-width: 600px;
+        }
+        .hidden-text {
+            display: none;
+            margin-top: 15px;
+            font-style: italic;
+            line-height: 1.8;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+        /* Falling Hearts */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fall 5s linear infinite;
+        }
+
+        /* Pop Animation */
+        @keyframes pop {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Animations */
+        @keyframes fall {
+            0% { top: -10%; transform: translateX(0) rotate(0deg); }
+            100% { top: 110%; transform: translateX(100px) rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Falling Hearts Effect -->
+    <div class="hearts" id="heartsContainer"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>🎂 Happy Birthday! 🎂</h1>
+        <p>This webpage is a special surprise for...</p>
+        <p class="birthday-girl">Pammy!</p>
+
+        <p>I hope your day is as incredibly wonderful and amazing as you are. You deserve all the happiness in the world!</p>
+
+        <!-- Balloon Photo Reveal Game -->
+        <div class="balloon-game">
+            <h2>🎈 Pop the Balloons to Reveal Surprises! 🎈</h2>
+            <p class="instruction">Click on each balloon to pop it and see what's inside!</p>
+            
+            <div class="balloons-container">
+                <!-- 6 Balloons that will reveal photos -->
+                <div class="balloon balloon-1" onclick="revealPhoto(1)"></div>
+                <div class="balloon balloon-2" onclick="revealPhoto(2)"></div>
+                <div class="balloon balloon-3" onclick="revealPhoto(3)"></div>
+                <div class="balloon balloon-4" onclick="revealPhoto(4)"></div>
+                <div class="balloon balloon-5" onclick="revealPhoto(5)"></div>
+                <div class="balloon balloon-6" onclick="revealPhoto(6)"></div>
+            </div>
+
+            <div class="photo-reveal">
+                <img id="revealedPhoto" class="revealed-photo" alt="Surprise photo!">
+                <p id="photoCaption" class="photo-caption"></p>
+                <p id="noPhotoText" class="instruction">Click a balloon to see a surprise photo!</p>
+            </div>
+        </div>
+
+        <!-- Secret Message -->
+        <div class="secret-message" onclick="revealMessage()">
+            👉 Click here for a secret message! 👈
+            <div class="hidden-text" id="hiddenText">
+                Hey… I know we don't talk much these days, and maybe things aren't the same as before.<br><br>
+                But still, I couldn't let this day pass without wishing you.<br><br>
+                You've always been someone special — not just because I liked you,<br>
+                but because you made a part of my days feel lighter.<br><br>
+                Even if we walked different ways, I still wish the best for you.<br>
+                May this birthday bring peace, smiles, and everything beautiful you truly deserve.<br>
+                You'll always have a quiet corner in my thoughts.<br><br>
+                🎂💫 Happy Birthday…<br><br>
+                — from someone who still smiles when your name appears 💙
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Your 6 photo URLs
+        const photoUrls = [
+            'https://scontent.fccu27-3.fna.fbcdn.net/v/t39.30808-6/548199100_122184992798479269_6678093765774389471_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=1Okxos7-WPcQ7kNvwGMVtli&_nc_oc=AdkPvWKfQ6ldSJevBR68VTWa0US_HqRsuoFiiGzj03RMwBxcxyptk3dyFElUfl1te1AVX2OKgPl1tk1huoDrfToQ&_nc_zt=23&_nc_ht=scontent.fccu27-3.fna&_nc_gid=ZLXPoevBqRBOqffgBS4qMQ&oh=00_AfeCqAaLAC7jDnNTKF6NAA2M_rxwRdD9pL--K_3WC7XB5w&oe=6907740F',
+            'https://scontent.fccu20-1.fna.fbcdn.net/v/t39.30808-6/540701462_122182427930479269_9182878120712938811_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=TfT8gl4nR4UQ7kNvwEwppfR&_nc_oc=AdmZlosaAOM3eTk749QTDnlrsjQaGOKd_L16Qldr5W_noweGov8E6GJYw0FpkEKa8oZ1aBkLb_HRaZc-keXuDgFF&_nc_zt=23&_nc_ht=scontent.fccu20-1.fna&_nc_gid=uQtvrQkMBVAxyyLuKOk3xQ&oh=00_AfcIDgPb8qNEtaAYWQcZbmQHzD-ra5uyxTH12a1n_UuRWQ&oe=690757FE',
+            'https://scontent.fccu27-1.fna.fbcdn.net/v/t39.30808-6/512879304_122172748214479269_1997259729289779411_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=13vmzyR0Kn4Q7kNvwEw0lte&_nc_oc=Adk8dYksMFvAcyavEdJf-CWtPZ_hjNrXaTvQ2K6y68O08E_KUdHeHAp9z_ekeXqtSQABxtnWKIoDNoxo2_danjsp&_nc_zt=23&_nc_ht=scontent.fccu27-1.fna&_nc_gid=N2zeu52E5snzIcZaLZYyMA&oh=00_AffsSgpXRU8vSHMjfd4Grx9w-GSgCcEZ-6M-jj7Uw9lAtQ&oe=69075F9D',
+            'https://scontent.fccu27-2.fna.fbcdn.net/v/t39.30808-6/494593019_122163203360479269_8597144167878168027_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=z4OEemDROgQQ7kNvwEDP4Xp&_nc_oc=AdmYJqMEdkAYxZAdbedhxJvbVvrOtqpSytidJG-4Km5_mDDAF9iHXSLaALJ75jJxIYF225ywOeQlC-8JCxPqyiDQ&_nc_zt=23&_nc_ht=scontent.fccu27-2.fna&_nc_gid=yF3tdD_rRVVE1lQW51rokg&oh=00_AffpQNGpFnjrZJ0wRelPhwgyhIRAdOG8owSe3ittI9XLFg&oe=6907887B',
+            'https://scontent.fccu27-1.fna.fbcdn.net/v/t39.30808-6/481142658_122151902156479269_1480317263845929576_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=VVA64-ZeMbkQ7kNvwEg52BR&_nc_oc=Adl7uFEHECZI8wG65KSrob5OAbjUKDiOxJ8YZGT5FdQ1AAkEQqCXMwZnxNjLN8KS5BsTqvIv30ClT4eoyFJHUTpI&_nc_zt=23&_nc_ht=scontent.fccu27-1.fna&_nc_gid=N6TM9h6X83aq-BpIIF-l9g&oh=00_AfdyO5OudUEIi7KSO7o5IQiFtinksrifpLx-EXxW-e0WVw&oe=69078FAC',
+            'https://scontent.fccu27-2.fna.fbcdn.net/v/t39.30808-6/475648701_122144938040479269_5744540251227630773_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=jTDVab-cWhsQ7kNvwF7LfgR&_nc_oc=AdnYyhWzpBBoJBgoTNzLzs7_yzcA5nUOrl9zoJ2-uF9XXc8r8mA0GHhwftiwd_58m73EJwHMgMCvTPucaZEUfHzz&_nc_zt=23&_nc_ht=scontent.fccu27-2.fna&_nc_gid=LPcvVbPfsQ_2X__sn7ocHQ&oh=00_AfdNMq_1knuy49sZlh5bO8iWJmHyjXy09teU7rQD-AL3wQ&oe=690764AD'
+        ];
+
+        // Photo captions (you can customize these)
+        const photoCaptions = [
+            "Beautiful Memory #1 ✨",
+            "Special Moment #2 💫",
+            "Unforgettable Time #3 🌟",
+            "Precious Memory #4 💖",
+            "Amazing Moment #5 🌈",
+            "Cherished Memory #6 🎀"
+        ];
+
+        // Function to create falling hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const numHearts = 30;
+
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Function to reveal photo when balloon is clicked
+        function revealPhoto(balloonNumber) {
+            const balloon = document.querySelector(`.balloon-${balloonNumber}`);
+            const photoElement = document.getElementById('revealedPhoto');
+            const noPhotoText = document.getElementById('noPhotoText');
+            const captionElement = document.getElementById('photoCaption');
+            
+            // Add pop animation to balloon
+            balloon.style.animation = 'pop 0.5s forwards';
+            
+            // Hide the instruction text
+            noPhotoText.style.display = 'none';
+            
+            // Show the corresponding photo
+            setTimeout(() => {
+                // Hide the popped balloon
+                balloon.style.display = 'none';
+                
+                // Show the photo with caption
+                photoElement.src = photoUrls[balloonNumber - 1];
+                photoElement.style.display = 'block';
+                photoElement.alt = `Surprise photo ${balloonNumber}!`;
+                
+                // Show caption
+                captionElement.textContent = photoCaptions[balloonNumber - 1];
+                captionElement.style.display = 'block';
+                
+            }, 400);
+        }
+
+        // Function to reveal the secret message
+        function revealMessage() {
+            const hiddenText = document.getElementById('hiddenText');
+            if (hiddenText.style.display === 'block') {
+                hiddenText.style.display = 'none';
+            } else {
+                hiddenText.style.display = 'block';
+            }
+        }
+
+        // Preload images for better performance
+        function preloadImages() {
+            photoUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Start the falling hearts and preload images when the page loads
+        window.onload = function() {
+            createHearts();
+            preloadImages();
+        };
+    </script>
+</body>
+</html>
